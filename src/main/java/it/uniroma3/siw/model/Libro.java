@@ -1,0 +1,76 @@
+package it.uniroma3.siw.model;
+
+
+
+import java.util.Objects;
+
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+@Entity
+public class Libro {
+
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.AUTO)
+	    private Long id;
+	    
+	    @NotBlank
+		private String titolo;
+	    @NotNull
+	    private Integer anno;
+	    @Lob
+		@Basic(fetch = FetchType.LAZY)
+		@Column(columnDefinition = "TEXT")
+		private String immagine;
+	    
+	    
+		public Long getId() {
+			return id;
+		}
+		public void setId(Long id) {
+			this.id = id;
+		}
+		public String getTitolo() {
+			return titolo;
+		}
+		public void setTitolo(String titolo) {
+			this.titolo = titolo;
+		}
+		public Integer getAnno() {
+			return anno;
+		}
+		public void setAnno(Integer anno) {
+			this.anno = anno;
+		}
+		public String getImmagine() {
+			return immagine;
+		}
+		public void setImmagine(String immagine) {
+			this.immagine = immagine;
+		}
+		@Override
+		public int hashCode() {
+			return Objects.hash(anno, titolo);
+		}
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Libro other = (Libro) obj;
+			return Objects.equals(anno, other.anno) && Objects.equals(titolo, other.titolo);
+		}
+	    
+
+}

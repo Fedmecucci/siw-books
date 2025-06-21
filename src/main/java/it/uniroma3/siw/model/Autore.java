@@ -1,0 +1,116 @@
+package it.uniroma3.siw.model;
+
+import java.time.LocalDate;
+import java.util.Objects;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+public class Autore {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@NotBlank
+	private String nome;
+	@NotBlank
+	private String cognome;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataNascita;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataMorte;
+	
+	@NotBlank
+	private String nazionalita;
+	
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@Column(columnDefinition = "TEXT")
+	private String immagine;
+
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCognome() {
+		return cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public LocalDate getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(LocalDate dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
+	public LocalDate getDataMorte() {
+		return dataMorte;
+	}
+
+	public void setDataMorte(LocalDate dataMorte) {
+		this.dataMorte = dataMorte;
+	}
+
+	public String getNazionalita() {
+		return nazionalita;
+	}
+
+	public void setNazionalita(String nazionalita) {
+		this.nazionalita = nazionalita;
+	}
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cognome, nome);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Autore other = (Autore) obj;
+		return Objects.equals(cognome, other.cognome) && Objects.equals(nome, other.nome);
+	}
+}
