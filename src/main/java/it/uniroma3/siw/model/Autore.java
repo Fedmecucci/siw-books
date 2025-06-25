@@ -1,6 +1,7 @@
 package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,7 +14,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Autore {
@@ -26,19 +29,23 @@ public class Autore {
 	@NotBlank
 	private String cognome;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dataNascita;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dataMorte;
-	
 	@NotBlank
 	private String nazionalita;
+	
+	@NotNull
+	private Integer dataNascita;
+	@NotNull
+	private Integer dataMorte;
+	
+	
 	
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@Column(columnDefinition = "TEXT")
 	private String immagine;
 
+	@ManyToMany(mappedBy="autori")
+	private List<Libro> libri;
 	
 	
 	public Long getId() {
@@ -65,21 +72,6 @@ public class Autore {
 		this.cognome = cognome;
 	}
 
-	public LocalDate getDataNascita() {
-		return dataNascita;
-	}
-
-	public void setDataNascita(LocalDate dataNascita) {
-		this.dataNascita = dataNascita;
-	}
-
-	public LocalDate getDataMorte() {
-		return dataMorte;
-	}
-
-	public void setDataMorte(LocalDate dataMorte) {
-		this.dataMorte = dataMorte;
-	}
 
 	public String getNazionalita() {
 		return nazionalita;
@@ -112,5 +104,29 @@ public class Autore {
 			return false;
 		Autore other = (Autore) obj;
 		return Objects.equals(cognome, other.cognome) && Objects.equals(nome, other.nome);
+	}
+
+	public List<Libro> getLibri() {
+		return libri;
+	}
+
+	public void setLibri(List<Libro> libri) {
+		this.libri = libri;
+	}
+
+	public Integer getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(Integer dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
+	public Integer getDataMorte() {
+		return dataMorte;
+	}
+
+	public void setDataMorte(Integer dataMorte) {
+		this.dataMorte = dataMorte;
 	}
 }

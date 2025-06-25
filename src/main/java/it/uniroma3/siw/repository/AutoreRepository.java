@@ -8,4 +8,5 @@ import it.uniroma3.siw.model.Autore;
 @Repository
 public interface AutoreRepository extends CrudRepository<Autore,Long>{
 
+	public boolean existsByNomeAndCognome(String nome, String cognome);
 }

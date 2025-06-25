@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
@@ -22,6 +24,12 @@ public class Recensione {
  
 	   private String testo;
 
+	   @ManyToOne
+	   private Libro libro;
+	   
+	   @OneToOne
+		private User user;
+	   
 	public Long getId() {
 		return id;
 	}
@@ -61,5 +69,21 @@ public class Recensione {
 			return false;
 		Recensione other = (Recensione) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	public Libro getLibro() {
+		return libro;
+	}
+
+	public void setLibro(Libro libro) {
+		this.libro = libro;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
