@@ -17,6 +17,7 @@ import it.uniroma3.siw.controller.GlobalController;
 
 import it.uniroma3.siw.model.Autore;
 import it.uniroma3.siw.model.Credentials;
+import it.uniroma3.siw.model.Libro;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.AutoreRepository;
 
@@ -56,6 +57,14 @@ public class AutoreService {
 		autoreRepository.save(autore);		
 	}
 	
+	 @Transactional
+		public void creaAutore(@ModelAttribute("autore") Autore autore, BindingResult bindingResult,
+				@RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+		 
+			this.save2(autore, imageFile);	
+		}
+
+	
 	@Transactional
 	public void modifica(@RequestParam("id") Long id,
 			@RequestParam("nuovoNome") String nuovoNome, @RequestParam("nuovoCognome") String nuovoCognome,
@@ -72,20 +81,19 @@ public class AutoreService {
 		this.save(a);	
 	}
 	
+	@Transactional
+	public void delete(Long id) {
+		Autore autore = this.findById(id);
+		autoreRepository.delete(autore);
+		
+	}
+	
 //	@Transactional
 //    public Artista findByUser(User user) {
 //        return artistaRepository.findByUser(user);
 //    }
 	
-	 @Transactional
-		public void creaAutore(@ModelAttribute("autore") Autore autore, BindingResult bindingResult,
-				@RequestParam("imageFile") MultipartFile imageFile) throws IOException {
-		 this.save(autore);
-			Credentials credenziali = credentialsService.getCredentials(globalController.getUser());
-			User user = credenziali.getUser();
-//			autore.setUser(user);
-			this.save2(autore, imageFile);	
-		}
+	
 
 
 }

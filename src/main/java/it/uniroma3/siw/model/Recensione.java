@@ -8,10 +8,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
 @Entity
+@Table(name = "recensioni", uniqueConstraints = {
+	    @UniqueConstraint(columnNames = {"user_id", "libro_id"})
+	})
 public class Recensione {
 	
 	 @Id
@@ -27,7 +32,7 @@ public class Recensione {
 	   @ManyToOne
 	   private Libro libro;
 	   
-	   @OneToOne
+	   @ManyToOne
 		private User user;
 	   
 	public Long getId() {

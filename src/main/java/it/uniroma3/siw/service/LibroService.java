@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.controller.GlobalController;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Libro;
 
@@ -25,6 +26,11 @@ public class LibroService {
 
 	@Autowired
 	private LibroRepository libroRepository;
+	
+	@Autowired
+	private CredentialsService credentialsService;
+	@Autowired
+	GlobalController globalController;
 	
 	public Iterable<Libro>findAll(){
 		return libroRepository.findAll();
@@ -61,12 +67,18 @@ public class LibroService {
 		@Transactional
 		public void modifica(@RequestParam("id") Long id,
 				@RequestParam("nuovoTitolo") String nuovoTitolo, @RequestParam("nuovoAnno") Integer nuovoAnno
-				
 				) {
 			Libro l = this.findById(id);
 			l.setTitolo(nuovoTitolo);
 			l.setAnno(nuovoAnno);
 			
 			this.save(l);	
+		}
+
+		@Transactional
+		public void delete(Long id) {
+			Libro libro = this.findById(id);
+			libroRepository.delete(libro);
+			
 		}
 }

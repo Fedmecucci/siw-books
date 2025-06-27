@@ -86,19 +86,22 @@ header {
 /* Immagini di sfondo per i quadranti */
 #quadrant1 {
 	
-     background-image: url('/immagini/libro2.jpg'); 
+/*      background-image: url('/immagini/libro2.jpg');  */
+background-color:#80ffff;
     background-position: 100% 80%; /* Posizione dell'immagine */
     background-size: 100%; /* Livello di zoom */
 }
 
 #quadrant2 {
-    background-image: url('/immagini/autore2.jpg');
+/*     background-image: url('/immagini/autore2.jpg'); */
+background-color:#80ff80;
     background-position: 100% 40%; /* Posizione dell'immagine */
     background-size: 100%; /* Livello di zoom */
 }
 
 #quadrant3 {
-    background-image: url('/immagini/homepage1.jpg');
+
+background-color:lime;
     background-position: 100% 90%; /* Posizione dell'immagine */
     background-size: 100%; /* Livello di zoom */
      font-family: cursive;
