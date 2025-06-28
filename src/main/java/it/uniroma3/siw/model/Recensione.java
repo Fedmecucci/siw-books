@@ -14,9 +14,9 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
 @Entity
-@Table(name = "recensioni", uniqueConstraints = {
-	    @UniqueConstraint(columnNames = {"user_id", "libro_id"})
-	})
+//@Table(name = "recensioni", uniqueConstraints = {
+//	    @UniqueConstraint(columnNames = {"user_id", "libro_id"})
+//	})
 public class Recensione {
 	
 	 @Id
